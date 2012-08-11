@@ -297,7 +297,7 @@ class Image(Resource):
     __slots__ = '_wand',
 
     def __init__(self, image=None, blob=None, file=None, filename=None,
-                 format=None):
+                 format=None, resolution=None):
         args = image, blob, file, filename
         if all(a is None for a in args):
             raise TypeError('missing arguments')
@@ -319,6 +319,8 @@ class Image(Resource):
                 self.wand = library.CloneMagickWand(image.wand)
             else:
                 self.wand = library.NewMagickWand()
+                if resolution:
+                    library.MagickSetResolution(self.wand, resolution, resolution)
                 read = False
                 if file is not None:
                     if format:
