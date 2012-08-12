@@ -261,6 +261,9 @@ try:
                                               ctypes.c_double]
     libmagick.MagickSetResolution.restype = ctypes.c_bool
 
+    libmagick.MagickAppendImages.argtypes = [ctypes.c_void_p, ctypes.c_bool]
+    libmagick.MagickAppendImages.restype = ctypes.c_void_p
+
 except AttributeError:
     raise ImportError('MagickWand shared library not found or incompatible')
 

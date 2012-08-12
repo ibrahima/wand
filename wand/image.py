@@ -1042,6 +1042,10 @@ class Image(Resource):
         if not result:
             self.raise_exception()
 
+    def append(self, stack=False):
+        library.MagickResetIterator(self.wand)
+        self.wand = library.MagickAppendImages(self.wand, stack)
+
 class Iterator(Resource, collections.Iterator):
     """Row iterator for :class:`Image`. It shouldn't be instantiated
     directly; instead, it can be acquired through :class:`Image` instance::
